@@ -1,11 +1,27 @@
+import WebSearchResults from '@/components/WebSearchResults'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import React from 'react'
 
-type SearchResultType = {
+export type Data = {
+  kind : string,
+  url : {
+    type : string,
+    template : string
+  },
+  searchInformation : {
+    searchTime : number,
+    formattedSearchTime : string,
+    totalResults : string,
+    formattedTotalResults : string
+  },
+  items : SearchResult[]
+}
+
+export type SearchResult = {
   title : string,
   link : string
-  snippet : string,
+  htmlSnippet : string,
+  formattedUrl : string
 }
 
 type Params = {
@@ -17,8 +33,8 @@ type Params = {
 export default async function WebSearchPage(params : Params) {
   const res = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.CUSTOM_SEARCH_API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${params.searchParams.searchTerm}`)
   if (!res.ok) throw new Error("Something went wrong")
-  const data = await res.json()
-  const results : SearchResultType[] = data.items
+  const data : Data = await res.json()
+  const results : SearchResult[] = data.items
 
   if (!results) {
     return (
@@ -36,9 +52,7 @@ export default async function WebSearchPage(params : Params) {
 
   return (
     <div>
-      {results && results.map(result => (
-        <Link href={result.link} key={result.title}>{result.title}</Link>
-      ))}
+      {results && <WebSearchResults data={data}/>}
     </div>
   )
 }
