@@ -1,4 +1,4 @@
-import WebSearchResults from '@/components/WebSearchResults'
+import WebSearchResult from '@/components/WebSearchResults'
 import Link from 'next/link'
 import React from 'react'
 
@@ -14,10 +14,10 @@ export type Data = {
     totalResults : string,
     formattedTotalResults : string
   },
-  items : SearchResult[]
+  items : WebResult[]
 }
 
-export type SearchResult = {
+export type WebResult = {
   title : string,
   link : string
   htmlSnippet : string,
@@ -34,7 +34,7 @@ export default async function WebSearchPage(params : Params) {
   const res = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.CUSTOM_SEARCH_API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${params.searchParams.searchTerm}`)
   if (!res.ok) throw new Error("Something went wrong")
   const data : Data = await res.json()
-  const results : SearchResult[] = data.items
+  const results : WebResult[] = data.items
 
   if (!results) {
     return (
@@ -52,7 +52,7 @@ export default async function WebSearchPage(params : Params) {
 
   return (
     <div>
-      {results && <WebSearchResults data={data}/>}
+      {results && <WebSearchResult data={data}/>}
     </div>
   )
 }
