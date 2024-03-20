@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Parser from "html-react-parser"
 import { Data, WebResult} from '@/app/search/web/page'
+import PaginationButtons from './PaginationButtons'
 
 type Props = {
   data : Data
@@ -9,7 +10,7 @@ type Props = {
 
 export default function WebSearchResult(props : Props) {
   return (
-    <div className='w-full mx-auto px-3 pb-24 sm:pl-[5%] md:pl-[14%] lg:pl-52'>
+    <div className='w-full mx-auto px-3 sm:pb-24 pb-40 sm:pl-[5%] md:pl-[14%] lg:pl-52'>
       <p className='text-gray-600 text-sm mb-5 mt-3'>
         About {props.data.searchInformation?.formattedTotalResults} results ({props.data.searchInformation?.formattedSearchTime} seconds)
       </p>
@@ -22,6 +23,7 @@ export default function WebSearchResult(props : Props) {
           <p className='text-gray-600'>{Parser(result.htmlSnippet)}</p>
         </div>
       ))}
+      <PaginationButtons />
     </div>
   )
 }

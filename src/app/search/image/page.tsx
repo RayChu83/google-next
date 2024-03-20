@@ -14,12 +14,14 @@ export type ImageResult = {
 
 type Props = {
   searchParams : {
-    searchTerm : string
+    searchTerm : string,
+    start? : string
   }
 }
 
 export default async function ImageSearchPage(props : Props) {
-  const res = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.CUSTOM_SEARCH_API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${props.searchParams.searchTerm}&searchType=image`)
+  const startIndex = props.searchParams.start || "1"
+  const res = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.CUSTOM_SEARCH_API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${props.searchParams.searchTerm}&searchType=image&start=${startIndex}`)
   if (!res.ok) throw new Error("Something went wrong")
   const data = await res.json()
   const results : ImageResult[] = data.items
