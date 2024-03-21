@@ -1,5 +1,5 @@
 import SearchHeader from '@/components/SearchHeader';
-import React from 'react'
+import React, { Suspense } from 'react'
 import "../globals.css"
 
 export default function layout({
@@ -9,7 +9,9 @@ export default function layout({
   }>) {
   return (
     <>
+      <Suspense>
         <SearchHeader />
+      </Suspense>
         {children}
     </>
   )

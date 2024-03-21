@@ -1,6 +1,6 @@
 import WebSearchResult from '@/components/WebSearchResults'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export type Data = {
   kind : string,
@@ -55,7 +55,7 @@ export default async function WebSearchPage(props : Props) {
 
   return (
     <div>
-      {results && <WebSearchResult data={data}/>}
+      {results && <Suspense><WebSearchResult data={data}/></Suspense>}
     </div>
   )
 }

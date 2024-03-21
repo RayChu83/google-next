@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Link from 'next/link'
 import ImageSearchResults from '@/components/ImageSearchResults'
 
@@ -43,7 +43,7 @@ export default async function ImageSearchPage(props : Props) {
 
   return (
     <div>
-      {results && <ImageSearchResults results={results}/>}
+      {results && <Suspense><ImageSearchResults results={results}/></Suspense>}
     </div>
   )
 }
