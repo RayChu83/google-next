@@ -1,6 +1,6 @@
 import { ImageResult } from '@/app/search/image/page'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import PaginationButtons from './PaginationButtons'
 
 type Props = {
@@ -28,7 +28,9 @@ export default function ImageSearchResults(props : Props) {
         ))}
       </div>
       <div className='ml-16'>
-        <PaginationButtons />
+        <Suspense>
+          <PaginationButtons />
+        </Suspense>
       </div>
     </div>
   )

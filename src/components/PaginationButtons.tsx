@@ -7,7 +7,6 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 
 export default function PaginationButtons() {
   const pathname = usePathname()
-  console.log(pathname)
   const searchParams = useSearchParams()
   const searchTerm = searchParams.get("searchTerm")
   const startIndex = searchParams.get("start") || "1"

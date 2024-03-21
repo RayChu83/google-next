@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Link from 'next/link'
 import Parser from "html-react-parser"
 import { Data, WebResult} from '@/app/search/web/page'
@@ -23,7 +23,9 @@ export default function WebSearchResult(props : Props) {
           <p className='text-gray-600'>{Parser(result.htmlSnippet)}</p>
         </div>
       ))}
-      <PaginationButtons />
+      <Suspense >
+        <PaginationButtons />
+      </Suspense>
     </div>
   )
 }
