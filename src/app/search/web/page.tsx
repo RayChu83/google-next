@@ -42,6 +42,7 @@ export default async function WebSearchPage(props : Props) {
     return (
       <div className="flex flex-col justify-center items-center pt-10">
         <h1 className="text-3xl mb-4">
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           No results found for "{props.searchParams.searchTerm}"
         </h1>
         <p className='text-lg'>
